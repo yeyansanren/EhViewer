@@ -1,6 +1,7 @@
 name: Releases
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "*"
@@ -52,7 +53,7 @@ jobs:
       - name: Generate Baseline Profile
         run: ./gradlew generateBaselineProfile
           -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
-          --no-parallel
+          --max-workers=1
 
       - name: Build
         run: ./gradlew assembleRelease
